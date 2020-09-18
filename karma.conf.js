@@ -13,12 +13,25 @@ module.exports = function (config) {
       require('@angular-devkit/build-angular/plugins/karma')
     ],
     client: {
-      clearContext: false // leave Jasmine Spec Runner output visible in browser
+      clearContext: false,
+      jasmine: {
+        random: false,
+      },
     },
     coverageIstanbulReporter: {
-      dir: require('path').join(__dirname, './coverage/Angular-Template-v9'),
+      dir: require('path').join(__dirname, '../coverage'),
+      includeAllSources: true,
       reports: ['html', 'lcovonly', 'text-summary'],
-      fixWebpackSourcePaths: true
+      fixWebpackSourcePaths: true,
+      thresholds: {
+        emitWarning: true,
+        global: {
+          statements: 80,
+          branches: 80,
+          functions: 80,
+          lines: 80,
+        }
+      }
     },
     reporters: ['progress', 'kjhtml'],
     port: 9876,
@@ -26,7 +39,12 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
-    singleRun: false,
-    restartOnFileChange: true
+    customLaunchers: {
+      ChromeHeadlessCI: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
+    },
+    singleRun: false
   });
 };
