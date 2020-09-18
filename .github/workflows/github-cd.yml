@@ -72,5 +72,5 @@ jobs:
         ACCESS_TOKEN: $GITHUB_TOKEN
         BASE_BRANCH: master
         BRANCH: gh-pages
-        FOLDER: Blazor-GithubPages/bin/Release/netstandard2.1/publish/wwwroot
+        FOLDER: dist
         SINGLE_COMMIT: true
